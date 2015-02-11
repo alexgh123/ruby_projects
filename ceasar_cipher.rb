@@ -15,7 +15,6 @@
 #next we change the new numbers into new letters.
 #we will then compress the letter array back into words array, then
 
-# how will i acomadate z to a or Z to A? ASCII values will need to be researched
 
 # quick and dirty version:
 
@@ -29,10 +28,14 @@ def easy_to_read_ceasar_cipher(input, shift_number)
   shift_num_array = number_array.map{|num| num + shift_number}
   scrambled_string = shift_num_array.map {|shift_num| shift_num.chr}.join
 end
-p ceasar_cipher("hello, I'm Alex", 5)
+p ceasar_cipher("hello, I'm Alexz", 50)
 
-p easy_to_read_ceasar_cipher("hello, I'm Alex", 5)
+p easy_to_read_ceasar_cipher("hello, I'm Alexz", 50)
 
-def unshifter(method_or_string_from_above, shift_amnt)
-  #eh, i know how, need to move on, although, another cryptographic question is, how do you sneakily figure out the shift number, that is the 'key'
-end
+#notes below on how to do a more challenging 'more correct' version
+
+# how will i acomadate z to a or Z to A? ASCII values will need to be researched
+
+#see further below for less rigrous version, i guess the only test for whether the method is viable is if you can unscramble it, i started to go down that road, but didn't b/c i think i acomplished assignment goals
+
+#so im going not do the more challenging version, but if i did, the mvp migth be to have a cap on the number of ASCII characters you can jump forward (limit the 2nd arg passed in to no more than 5, like a fliter). The next more challenging way to build the cipher is to have the ascii values range and only have the values shift within the range. Idk, i think I acomplished the goal of the project and am moving on while recognizing this could be improved
