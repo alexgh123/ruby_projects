@@ -31,32 +31,52 @@
 #   array
 # end
 
-def fib_iter(num)
-  until num == 1
-
-end
-
 
 #first working version, albeit ugly, i think i used a recursive call in an iterative solution
-def fib_recur(num)
-    array = [1,1]
-  if num == 1
-    array = array[0]
-  elsif num == 2
-    array
-  else
-    until num == 2 do
-    array << (array[-1] + array[-2])
-    num -= 1
-    fib_iter(num)
-    end
-  end
-  array
+# def fib_recur(num)
+#     array = [1,1]
+#   if num == 1
+#     array = array[0]
+#   elsif num == 2
+#     array
+#   else
+#     until num == 2 do
+#     array << (array[-1] + array[-2])
+#     num -= 1
+#     fib_iter(num)
+#     end
+#   end
+#   array
+# end
+
+def fib_iter(num)
+  return [0] if num == 0
+  nums = [0,1]
+  (2..num).each { |num| nums << nums[num-2] + nums[num-1]}
+  nums
 end
 
+def fib_recur(num)
+  return [0] if num == 0
+  return [0,1] if num == 1
+  arr = fib_recur(num-1)
+  arr << arr[-1]+arr[-2]
+end
+
+p "iterative: "
+p "0: " + "#{fib_iter(0)}"
 p "1: " + "#{fib_iter(1)}"
 p "2: " + "#{fib_iter(2)}"
 p "3: " + "#{fib_iter(3)}"
 p "4: " + "#{fib_iter(4)}"
 p "5: " + "#{fib_iter(5)}"
 p "6: " + "#{fib_iter(6)}"
+
+
+p "recursive: "
+p "1: " + "#{fib_recur(1)}"
+p "2: " + "#{fib_recur(2)}"
+p "3: " + "#{fib_recur(3)}"
+p "4: " + "#{fib_recur(4)}"
+p "5: " + "#{fib_recur(5)}"
+p "6: " + "#{fib_recur(6)}"
