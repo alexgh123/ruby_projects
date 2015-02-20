@@ -18,30 +18,31 @@
   # else
   #   if array[0] > array[1]
 
+  # if first_half[0] == second_half[0]
+    #   output_array << first_half.shift
+    # elsif first_half[0] > second_half[0]
+    #   output_array << second_half.shift
+    # else first_half[0] < second_half[0]
+    #   output_array << first_half.shift
+    # end
 
-def merge_sort(array)
-
-#what is my loop doing?
-#unitl my array.length == ??
-  n = array.length
-  if n > 1
-  first_half = array[0..(n/2)]
-  second_half = array[(1+(n/2))..n]
-
-  merge_sort(first_half)
-  merge_sort(second_half)
-
- #prob end loop?
-  else
-    p 'array not longer than 1 element'
-  end
-
+def merge(xs, ys)
+  return ys if xs.empty?
+  return xs if ys.empty?
+  xs[0] < ys[0] ? [xs[0]] + merge(xs[1..-1],ys) : [ys[0]] + merge(xs,ys[1..-1])
 end
 
-#if array 1 has smallest element, put that in new array
-# if array 2 has smallest element, put that in new array
+def merge_sort(xs)
+  return xs if xs.size < 2
+  n = xs.size / 2
+  merge(merge_sort(xs[0...n]), merge_sort(xs[n..-1]))
+end
 
-merge_sort([1,2,3,4,5])
-merge_sort([5,4,3,2,1])
-merge_sort([1,2,1])
-merge_sort([5,4,5])
+
+
+p merge_sort([1,2,3,4,5])
+p merge_sort([5,4,3,2,1])
+p merge_sort([1,2,1])
+p merge_sort([5,4,5])
+p '-----'
+# merge_sort([5])
