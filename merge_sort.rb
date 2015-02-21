@@ -26,23 +26,32 @@
     #   output_array << first_half.shift
     # end
 
-def merge(xs, ys)
-  return ys if xs.empty?
-  return xs if ys.empty?
-  xs[0] < ys[0] ? [xs[0]] + merge(xs[1..-1],ys) : [ys[0]] + merge(xs,ys[1..-1])
+def merge_sort(array)
+  return array if array.size < 2
+  midpoint = array.size / 2
+  first_array = merge_sort(array[0...midpoint])
+  second_array = merge_sort(array[midpoint..-1])
+  merge(first_array, second_array)
 end
 
-def merge_sort(xs)
-  return xs if xs.size < 2
-  n = xs.size / 2
-  merge(merge_sort(xs[0...n]), merge_sort(xs[n..-1]))
+def merge(first_array, second_array)
+  return second_array if first_array.empty?
+  return first_array if second_array.empty?
+
+  if first_array[0] < second_array[0]
+    [first_array[0]] + merge(first_array[1..-1],second_array)
+  else
+    [second_array[0]] + merge(first_array,second_array[1..-1])
+  end
 end
 
 
 
-p merge_sort([1,2,3,4,5])
-p merge_sort([5,4,3,2,1])
+
+
+# p merge_sort([1,2,3,4,5])
+p merge_sort([5,43,3,22,1])
 p merge_sort([1,2,1])
 p merge_sort([5,4,5])
 p '-----'
-# merge_sort([5])
+p merge_sort([5])
