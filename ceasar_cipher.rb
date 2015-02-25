@@ -44,13 +44,14 @@ end
 
 #what is my goal: build a more correct ceasar_cipher
 
-def ceasars_palace(input, num)
-  # convert input to numbers
-  # examine numbers, i need a range to work within for caaps/lower
-  #its starting to become a real pain to work with a different range than what i have, i wouldn't think caps are that important
-  array_of_nums = input.split(//).map {|x|x.ord}
-  #if array of nums is between 65-90 or if array of nums is between 97-122, let them cycle between there, other nums cycle in bigger system? I think not, but this is the begining of a more complex crypotgraphic function which does multi mixing
+def ceasars_palace(string, num)
+  string.each_byte { |i|
+    case i when (65..90),(97..122) then offset = i + num
+    (offset > 90 && offset < 97 ? offset = offset - 26 : nil) else offset = i end
+    print offset.chr }
 end
 
-p ceasars_palace("AZ",1)
-p ceasars_palace("az",1)
+ p ceasars_palace("AZ",2)
+ p ceasars_palace("az",2)
+ p "hello"
+ p ceasars_palace("hello", 5)
